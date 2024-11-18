@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Session Tracking</title>
+    <script>
+        const setCookie = (name, value, days) => 
+            document.cookie = `${name}=${value}; expires=${new Date(Date.now() + days * 864e5).toUTCString()}; path=/`;
+        
+        const getCookie = name => 
+            document.cookie.split('; ').find(row => row.startsWith(name + '='))?.split('=')[1] || "[]";
+
+        const trackTransaction = () => {
+            const transactions = JSON.parse(getCookie("transactionHistory"));
+            transactions.push(`Transaction ${transactions.length + 1}`);
+            setCookie("transactionHistory", JSON.stringify(transactions), 7);
+            document.getElementById("history").textContent = transactions.join(", ");
+        };
+
+        const showCookies = () => {
+            alert(document.cookie || "No cookies available!");
+        };
+    </script>
+</head>
+<body>
+    <h1>Session Tracking</h1>
+    <button onclick="trackTransaction()">Add Transaction</button>
+    <button onclick="showCookies()">Show Cookies</button>
+    <p>History: <span id="history"></span></p>
+</body>
+</html>
