@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>Welcome to NNRG e-Book's website</title>
+    <script>
+        function validate() {
+            let f = document.forms["f1"];
+            let uname = f.username.value, pwd = f.password.value, email = f.email.value, phno = f.phno.value, addr = f.address.value;
+
+            if (!uname || uname.length < 8) return alert("Enter UserName (min 8 chars)"), f.username.focus(), false;
+            if (!pwd || pwd.length < 6) return alert("Enter Password (min 6 chars)"), f.password.focus(), false;
+            if (!email.includes("@")) return alert("Enter valid Email ID"), f.email.focus(), false;
+            if (!phno || isNaN(phno) || phno.length != 10) return alert("Enter valid Phone Number (10 digits)"), f.phno.focus(), false;
+            if (![...f.gen].some(g => g.checked)) return alert("Choose a Gender"), false;
+            if (![...f.lang].some(l => l.checked)) return alert("Select at least one Language"), false;
+            if (!addr) return alert("Enter Address"), f.address.focus(), false;
+
+            alert("Registration Successful");
+        }
+    </script>
+</head>
+<body>
+<center>
+    <h3>Registration Form</h3>
+    <form name="f1">
+        <table>
+            <tr><td>User Name:*</td><td><input type="text" name="username"></td></tr>
+            <tr><td>Password:*</td><td><input type="password" name="password"></td></tr>
+            <tr><td>Email ID:*</td><td><input type="text" name="email"></td></tr>
+            <tr><td>Phone Number:*</td><td><input type="text" name="phno"></td></tr>
+            <tr><td>Gender:*</td>
+                <td><input type="radio" name="gen" value="Male">Male
+                    <input type="radio" name="gen" value="Female">Female</td></tr>
+            <tr><td>Language Known:*</td>
+                <td><input type="checkbox" name="lang" value="English">English
+                    <input type="checkbox" name="lang" value="Telugu">Telugu
+                    <input type="checkbox" name="lang" value="Hindi">Hindi
+                    <input type="checkbox" name="lang" value="Tamil">Tamil</td></tr>
+            <tr><td>Address:*</td><td><textarea name="address"></textarea></td></tr>
+            <tr><td colspan="2">
+                <input type="button" value="SUBMIT" onclick="validate()">
+                <input type="reset" value="RESET"></td></tr>
+            <tr><td colspan="2">*<span style="color:red">fields are mandatory</span></td></tr>
+        </table>
+    </form>
+</center>
+</body>
+</html>
